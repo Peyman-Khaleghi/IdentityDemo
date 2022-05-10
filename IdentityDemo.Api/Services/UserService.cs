@@ -15,11 +15,13 @@ namespace IdentityDemo.Api.Services
     {
         private UserManager<IdentityUser> _userManger;
         private readonly IConfiguration _configuration;
+        private readonly IMailService _mailService;
 
-        public UserService(UserManager<IdentityUser> userManger , IConfiguration configuration)
+        public UserService(UserManager<IdentityUser> userManger , IConfiguration configuration , IMailService mailService)
         {
             _userManger = userManger;
             _configuration = configuration;
+            _mailService = mailService;
         }
 
         public async Task<IServiceResult<List<IdentityUser>>> GetAllUser()

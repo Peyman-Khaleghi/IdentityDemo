@@ -49,6 +49,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddTransient<IMailService, MailService>();
 
 var app = builder.Build();
 

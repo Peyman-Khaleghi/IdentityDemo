@@ -9,10 +9,12 @@ namespace IdentityDemo.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IMailService _mailService;
 
-        public AuthController(IUserService userService)
+        public AuthController(IUserService userService , IMailService mailService)
         {
             _userService = userService;
+            _mailService = mailService;
         }
 
         [HttpPost("Register")]
@@ -28,6 +30,7 @@ namespace IdentityDemo.Api.Controllers
         public async Task<object> LoginUser(LoginViewModel input)
         {
             var result = await _userService.LoginUser(input);
+            await _mailService.SendEmailAsync(input.Email, "New login", "<h1>Hey!, new login to your account noticed</h1><p>New login to your account at " + DateTime.Now + "</p>");
             return result;
         }
     }
