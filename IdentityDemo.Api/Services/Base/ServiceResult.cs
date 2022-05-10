@@ -10,14 +10,15 @@ namespace IdentityDemo.Api.Services.Base
 
         public int Status { get; init; }
 
-        public bool IsSuccess => Status % 100 == 2;
+        public bool IsSuccess { get; set; }
 
         public static ServiceResult<T> Ok(T value)
         {
             return new ServiceResult<T>
             {
                 Status = StatusCodes.Status200OK,
-                Value = value
+                Value = value,
+                IsSuccess = true,
             };
         }
 
@@ -25,7 +26,8 @@ namespace IdentityDemo.Api.Services.Base
         {
             return new ServiceResult<T>
             {
-                Status = StatusCodes.Status404NotFound
+                Status = StatusCodes.Status404NotFound,
+                IsSuccess = false,
             };
         }
 
@@ -34,7 +36,8 @@ namespace IdentityDemo.Api.Services.Base
             return new ServiceResult<T>
             {
                 Status = StatusCodes.Status400BadRequest,
-                ErrorCode = (int)code
+                ErrorCode = (int)code,
+                IsSuccess = false,
             };
         }
 
@@ -43,7 +46,8 @@ namespace IdentityDemo.Api.Services.Base
             return new ServiceResult<T>
             {
                 Status = StatusCodes.Status201Created,
-                Value = value
+                Value = value,
+                IsSuccess = true,
             };
         }
     }
@@ -54,13 +58,14 @@ namespace IdentityDemo.Api.Services.Base
 
         public int Status { get; init; }
 
-        public bool IsSuccess => Status % 100 == 1;
+        public bool IsSuccess { get; set; }
 
         public static ServiceResult Ok()
         {
             return new ServiceResult
             {
                 Status = StatusCodes.Status200OK,
+                IsSuccess = true,
             };
         }
 
@@ -68,7 +73,8 @@ namespace IdentityDemo.Api.Services.Base
         {
             return new ServiceResult
             {
-                Status = StatusCodes.Status404NotFound
+                Status = StatusCodes.Status404NotFound,
+                IsSuccess = false,
             };
         }
 
@@ -77,7 +83,8 @@ namespace IdentityDemo.Api.Services.Base
             return new ServiceResult
             {
                 Status = StatusCodes.Status400BadRequest,
-                ErrorCode = (int)code
+                ErrorCode = (int)code,
+                IsSuccess = false,
             };
         }
 
@@ -85,7 +92,8 @@ namespace IdentityDemo.Api.Services.Base
         {
             return new ServiceResult
             {
-                Status = StatusCodes.Status201Created
+                Status = StatusCodes.Status201Created,
+                IsSuccess = true,
             };
         }
 
@@ -93,7 +101,8 @@ namespace IdentityDemo.Api.Services.Base
         {
             return new ServiceResult
             {
-                Status = StatusCodes.Status202Accepted
+                Status = StatusCodes.Status202Accepted,
+                IsSuccess = true,
             };
         }
 
@@ -101,7 +110,8 @@ namespace IdentityDemo.Api.Services.Base
         {
             return new ServiceResult
             {
-                Status = StatusCodes.Status204NoContent
+                Status = StatusCodes.Status204NoContent,
+                IsSuccess =true,
             };
         }
     }
